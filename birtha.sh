@@ -1,14 +1,15 @@
 #!/bin/bash
 # ABOUT:
 #  This Script will perform Remote IR on Unix/Ubuntu based Hosts using ssh keypair authentication  
-#       Last Updated: 12.8.19
-#       Author: AJ
+#       Last Updated: 5.24.21
+#       Author: Arron Jablonowski 
 # USAGE:
 #  Modules can be chosen in the "./Modules.conf" file. Simply comment '#' out lines you don't want to run. 
 #  example: $ ./birtha.sh <User@HostName>
 #  example: $ ./birtha.sh <User@IPaddr>
 #  example: $ ./birtha.sh </path/to/hostlist.txt>   (*Host list should contain one 'User@Hostname' per line.)
 #  example: $ ./birtha.sh </path/to/hostlist.txt>  [./Modules/Modules.conf]
+#  example: $ ./birtha.sh localhost ./Modules/Network_Modules.conf
 
 # ASCII ART 
 echo_ascii1(){
