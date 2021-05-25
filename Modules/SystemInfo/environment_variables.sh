@@ -1,0 +1,2 @@
+#Display enviroment variables 
+env
