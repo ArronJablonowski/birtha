@@ -115,9 +115,9 @@ Run_LiveIR() {
 if test -z "$1"; then # $1 is a positional parameter
 	# then $1 is null 
 	echo "!!! ERROR !!! -- Missing parameter."
-	echo "Please run laNSA.sh as follows: "
-	echo "$ ./laNSA.sh <user@hostname>"
-	echo "$ ./laNSA.sh </path/to/hostlist.txt> (*Host list should contain one user@hostname per line.)"
+	echo "Please run birtha.sh as follows: "
+	echo "$ ./birtha.sh <user@hostname>"
+	echo "$ ./birtha.sh </path/to/hostlist.txt> (*Host list should contain one user@hostname per line.)"
     exit
 fi 
 
