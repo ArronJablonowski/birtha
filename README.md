@@ -1,6 +1,7 @@
 # birtha - Bash Incident Response & Threat Hunt Automation
 A modular bash framework for automating Live IR & Threat Hunting on Unix systems. 
 
+
 Pre-Usage Setup: 
 
 * Create a new ssh key pair, with a strong password to protect the private key. 
