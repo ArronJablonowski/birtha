@@ -1,4 +1,21 @@
 # birtha - Bash Incident Response & Threat Hunt Automation
-A modular bash framework for automating IR & Threat Hunting on unix systems. 
+A modular bash framework for automating Live IR & Threat Hunting on Unix systems. 
 
-A work in progress. Use at your own risk. 
+
+Usage: 
+
+* Run birtha against a single hostname. Default config file will be used. 
+```
+./birtha.sh username@HostName
+```
+
+* Run birtha against a single IP, and specify a config file via file path. 
+```
+./birtha.sh username@IP ./Modules/Network_Modules.conf
+```        
+ 
+ * Run birtha against a list of hosts (.txt - one host per line), and specify a config file via file path. 
+```
+./birtha.sh username@HostName ./Modules/Network_Modules.conf
+```        
+ 
