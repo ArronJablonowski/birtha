@@ -3,8 +3,8 @@ A modular bash framework for automating Live IR & Threat Hunting on Unix systems
 
 Pre-Usage Setup: 
 
-Create a new ssh key pair, with a strong password to protect the private key. 
-Distribute the public key to any hosts birth will ssh to. 
+* Create a new ssh key pair, with a strong password to protect the private key. 
+* Distribute the public key to any hosts birth will ssh to. 
 It is recommended to install the public key under the remote host's root user, so birth can run remote commands and scripts without permissions issues.  
 
 
