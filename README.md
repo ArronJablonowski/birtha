@@ -11,12 +11,12 @@ Usage:
 
 * Run birtha against a single IP, and specify a config file via file path. 
 ```
-./birtha.sh username@IP ./Modules/Network_Modules.conf
+./birtha.sh <username@IP> ./Modules/Network_Modules.conf
 ```        
  
  * Run birtha against a list of hosts (.txt - one host per line), and specify a config file via file path. 
 ```
-./birtha.sh username@HostName ./Modules/Network_Modules.conf
+./birtha.sh </path/to/hostlist.txt> ./Modules/Network_Modules.conf
 ```        
  
 ![alt text](https://github.com/ArronJablonowski/birtha/blob/main/birtha.png?raw=true)
