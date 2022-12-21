@@ -4,9 +4,9 @@ A modular bash framework for automating Live IR & Threat Hunting on Unix systems
 
 Usage: 
 
-* Run birtha against a single hostname. Default config file will be used. 
+* Run birtha against a single host. Default config file will be used. 
 ```
-./birtha.sh user@HostName
+./birtha.sh user@hostname
 ```
 
 * Run birtha against a single IP, and specify a config file via file path. 
