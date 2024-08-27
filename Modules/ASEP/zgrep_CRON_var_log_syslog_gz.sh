@@ -1,0 +1,12 @@
+#!/bin/bash
+# description:
+#
+#	zgrep all *.gz archives (without needing to unzip/untar) for the string 'CRON'
+#
+#	Syslogs store the time the a cron job was started, the user account used, and the command ran. 
+#
+# about: 
+#	This script is part of the Birtha project: https://github.com/ArronJablonowski/birtha 	
+#
+
+zgrep 'CRON' /var/log/syslog*.gz
