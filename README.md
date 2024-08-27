@@ -26,4 +26,4 @@ Usage:
 ./birtha.sh </path/to/hostlist.txt> ./Modules/Network_Modules.conf
 ```        
  
-![alt text](https://github.com/ArronJablonowski/birtha/blob/main/birtha.png?raw=true)
+![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/birtha.png?raw=true)
