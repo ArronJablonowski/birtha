@@ -1,2 +1,0 @@
-#Display enviroment variables 
-env
