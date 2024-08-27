@@ -13,17 +13,17 @@ Usage:
 
 * Run birtha against a single host. Default config file will be used. 
 ```
-./birtha.sh <user@hostname>
+./birtha.sh <adminUsername@hostname>
 ```
 
 * Run birtha against a single IP, and specify a config file via file path. 
 ```
-./birtha.sh <user@IP> ./Modules/Network_Modules.conf
+./birtha.sh <adminUsername@hostname> ./BirthaConfigs/Default_Modules.conf
 ```        
  
  * Run birtha against a list of hosts (.txt - one host per line), and specify a config file via file path. 
 ```
-./birtha.sh </path/to/hostlist.txt> ./Modules/Network_Modules.conf
+./birtha.sh ./HostLists/hosts.txt ./BirthaConfigs/Default_Modules.conf
 ```        
  
 ![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/birtha.png?raw=true)
