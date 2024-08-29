@@ -16,17 +16,17 @@ Usage:
 ssh-add ./path/to/private/key/IncidentResponse_ed25519
 ```
 
-2a. Run birtha against a single host. Default config file will be used. 
+2. (a) Run birtha against a single host. Default config file will be used. 
 ```
 ./birtha.sh <adminUsername@hostname>
 ```
 
-2b. Run birtha against a single IP, and specify a config file via file path. 
+2. (b) Run birtha against a single IP, and specify a config file via file path. 
 ```
 ./birtha.sh <adminUsername@hostname> ./BirthaConfigs/Default_Modules.conf
 ```        
  
-2c. Run birtha against a list of hosts (.txt - one host per line), and specify a config file via file path. 
+2. (c) Run birtha against a list of hosts (.txt - one host per line), and specify a config file via file path. 
 ```
 ./birtha.sh ./HostLists/hosts.txt ./BirthaConfigs/Default_Modules.conf
 ```        
