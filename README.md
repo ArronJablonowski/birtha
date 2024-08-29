@@ -11,17 +11,22 @@ Pre-Usage Setup:
 
 Usage: 
 
-* Run birtha against a single host. Default config file will be used. 
+Ssh-add (or risk getting tons of prompts for your private key's passphrase)
+```
+ssh-add ./path/to/private/key/IncidentResponse_ed25519
+```
+
+Run birtha against a single host. Default config file will be used. 
 ```
 ./birtha.sh <adminUsername@hostname>
 ```
 
-* Run birtha against a single IP, and specify a config file via file path. 
+Run birtha against a single IP, and specify a config file via file path. 
 ```
 ./birtha.sh <adminUsername@hostname> ./BirthaConfigs/Default_Modules.conf
 ```        
  
- * Run birtha against a list of hosts (.txt - one host per line), and specify a config file via file path. 
+Run birtha against a list of hosts (.txt - one host per line), and specify a config file via file path. 
 ```
 ./birtha.sh ./HostLists/hosts.txt ./BirthaConfigs/Default_Modules.conf
 ```        
