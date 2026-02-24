@@ -69,7 +69,7 @@ while read line; do
             ;;   
         esac
     fi
-done <  "$infile"
+done <  $infile | tail -n 500 # limit results to last 500
 
 
 # 00:e0:67:21:cb:09

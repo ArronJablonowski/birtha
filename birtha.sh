@@ -78,6 +78,7 @@ echo_ascii1
 
 # Script Functions
 echo_config() {
+    configlinecount=0
     configFile=$1
     echo ""
     echo "CONFIG FILE FOUND: $configFile"
@@ -85,13 +86,15 @@ echo_config() {
     echo "LISTING MODULES:"
     while IFS= read -r line
 	do	
+        ((configlinecount++))
         #if line is not a comment 
         if grep -q "\#" <<< "$line"; then #if commented "#" then skip 
             continue #basically do nothing... 
         else
             ##Skip config lines with any " " blank spaces 
             if !(test -z "${line// }"); then  # ${line// } >> '// ' removes spaces prior to checking 
-                echo " - Module: $line"                
+                echo " [ Line: $configlinecount ] - Module: $line " # verbose w/line count
+                # echo " - Module: $line "                
             fi
         fi 
 	done < "$configFile"
@@ -241,7 +244,8 @@ else
 fi
 
  
-# Script starts running here 
+## Script starts running here ##
+################################
 if test -f "$1"; then  # Check If file (hostlist) exists 
     hostcount=$(cat $1 | wc -l)
     if [ "$hostcount" -ge "$multiHostNumber" ]; then 
