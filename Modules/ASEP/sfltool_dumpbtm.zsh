@@ -1,11 +1,9 @@
 #!/bin/zsh
 # description:
-#	 List users on MacOS
-#
-#	
+#   # Dump the current BTM (Background Task Management) items
 # 
 # about: 
 #	This script is part of the Birtha project: https://github.com/ArronJablonowski/birtha 
 #
-# dscl . list /Users
-dscl . -list /Users | grep -v '^_'
+
+sfltool dumpbtm

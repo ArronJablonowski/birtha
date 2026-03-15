@@ -1,11 +1,9 @@
 #!/bin/zsh
 # description:
-#	 List users on MacOS
+#   cat /etc/resolv.conf - some DNS resolution can hide in this less commonly used conf file 	
 #
-#	
 # 
 # about: 
 #	This script is part of the Birtha project: https://github.com/ArronJablonowski/birtha 
 #
-# dscl . list /Users
-dscl . -list /Users | grep -v '^_'
+cat /etc/resolv.conf

@@ -1,11 +1,10 @@
 #!/bin/zsh
 # description:
-#	 List users on MacOS
+#	 List admin group users
 #
 #	
 # 
 # about: 
 #	This script is part of the Birtha project: https://github.com/ArronJablonowski/birtha 
 #
-# dscl . list /Users
-dscl . -list /Users | grep -v '^_'
+dscl . -read /Groups/admin GroupMembership
