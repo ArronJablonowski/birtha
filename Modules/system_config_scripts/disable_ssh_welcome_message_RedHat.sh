@@ -1,6 +1,6 @@
 #!/bin/bash
 # description:
-#	Disable the ssh login message for RaspberryPi OS 
+#	Disable the ssh login message for Red Hat Enterprise Linux  
 #	
 #	
 # 
@@ -10,7 +10,7 @@
 #
 ls -la $HOME
 echo ""
-echo "removing .hushlogin from $HOME"
-cd $HOME && rm .hushlogin
+echo "Adding .hushlogin to $HOME"
+cd $HOME && touch .hushlogin
 echo ""
 ls -la $HOME

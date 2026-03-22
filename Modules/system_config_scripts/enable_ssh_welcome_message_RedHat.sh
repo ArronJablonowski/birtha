@@ -1,6 +1,6 @@
 #!/bin/bash
 # description:
-#	Disable the ssh login message for RaspberryPi OS 
+#	Disable the ssh login message for Red Hat Enterprise Linux  
 #	
 #	
 # 
