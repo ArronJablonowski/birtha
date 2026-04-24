@@ -15,7 +15,7 @@ Pre-Usage Setup:
 
 Usage: 
 
-1. Ssh-add (or risk getting tons of prompts for your private key's passphrase)
+1. ssh-add *(or risk getting tons of prompts for your private key's passphrase)*
 ```
 ssh-add ./path/to/private/key/IncidentResponse_ed25519
 ```
