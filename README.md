@@ -1,6 +1,8 @@
-# birtha - Bash Incident Response & Threat Hunt Automation
-A modular bash framework for automating Live IR & Threat Hunting on Unix systems. 
+# birtha - bash incident response & threat hunt automation
 
+*"birtha: Because you can't install EDR on everything."* 
+
+birtha is a modular bash framework for automating Live IR & Threat Hunting on Unix systems. 
 
 Pre-Usage Setup: 
 
