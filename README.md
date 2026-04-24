@@ -9,7 +9,7 @@ birtha is a modular bash framework for automating Live IR & Threat Hunting on Un
 Pre-Usage Setup: 
 
 * Create a new ssh key pair, with a strong passphrase to protect the private key.
-* Distribute the public key to any hosts birth will ssh to. 
+* Distribute the public key to any hosts birtha will ssh to. 
   * It is recommended to add the public key under the remote host's root user so birth can run remote commands and scripts without permissions issues.  
 
 
