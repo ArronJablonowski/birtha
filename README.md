@@ -52,15 +52,14 @@ To run birtha against a list of hosts (one per line in the text file) and specif
 
 ## Configuration Files
 
-The default configuration file `Default_Modules.conf` includes a variety of modules for different tasks, such as network scanning, process enumeration, log analysis, and more. 
+The default configuration file `Default_Modules.conf` includes a variety of modules for different tasks, such as listing network connections, process enumeration, log analysis, and more. 
 You can customize this file or create your own by editing the sections under "####### >>> Network <<< #######" and so on.
 
-Each module is represented by a command that will be executed on the remote host. By default, birtha will run all modules against a single host at a time. For multiple hosts, 
-you can specify how many hosts to process simultaneously using the `multiHostNumber` and `sshDelaySingleHost` variables in the script.
+Each module is represented by a command or a script that will be executed on the remote host. By default, birtha will run all modules against a single host at a time. For multiple hosts, you can specify how many hosts to process simultaneously using the `multiHostNumber` and `sshDelaySingleHost` variables in the script.
 
 ## Example Configuration File
 
-Here's an example of a custom configuration file that includes specific modules for network scanning and log analysis:
+Here's an example of a custom configuration file that includes specific modules for listing network connections and log analysis:
 
 ```bash
 # Default_Modules.conf
@@ -76,8 +75,7 @@ Here's an example of a custom configuration file that includes specific modules 
 
 ## Output and Results
 
-After running birtha, the results will be stored in a timestamped directory within the `Results` folder. Each module's output will be saved in its respective subdirectory for 
-easy review.
+After running birtha, the results will be stored in a timestamped directory within the `Results` folder. Each module's output will be saved in its respective subdirectory for easy review.
 
 ## Troubleshooting
 
@@ -94,8 +92,7 @@ If you encounter any issues during the execution of birtha, consider the followi
 
 ## Conclusion
 
-birtha is a powerful tool for automating incident response tasks on Unix-based systems. By following the pre-usage setup instructions, using the provided configuration file 
-examples, and troubleshooting any issues that arise, you can efficiently respond to threats across multiple hosts with ease.
+birtha is a powerful tool for automating incident response tasks on Unix-based systems. By following the pre-usage setup instructions, and using the provided configuration file examples, you can efficiently respond to threats across multiple hosts with ease.
 
         
  
