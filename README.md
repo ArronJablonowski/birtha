@@ -1,6 +1,6 @@
 # birtha - Bash Incident Response & Threat Hunting Automation
 
-*"birtha: Because you can't install EDR on everything."*
+*"birtha: Because you can't install EDR everywhere, and it can't log everything."*
 
 ## Introduction
 
