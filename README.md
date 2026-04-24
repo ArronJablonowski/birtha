@@ -22,7 +22,10 @@ Before using birtha, ensure you have a strong understanding of its capabilities 
    - It is recommended to distribute the public key under the root user for seamless execution of remote commands and scripts.
 
 ## Usage
-
+Add you private key to the ssh agent before running birtha
+```bash
+ssh-add ./path/to/private/key/IncidentResponse_ed25519
+```
 ### Running against a Single Host
 
 To run birtha against a single host using the default configuration file:
