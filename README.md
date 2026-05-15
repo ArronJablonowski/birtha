@@ -6,11 +6,11 @@ Birtha is designed for SOC analysts and incident responders who need repeatable 
 
 ![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/birtha.png?raw=true)
 
-### Html report - Stats provide a brief overview of Birtha’s collection performance and finding volume.
+### Html Report - Stats provide a brief overview of Birtha’s collection performance and finding volume.
 ##
 ![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/stats.png?raw=true)
 
-### Html report - Findings help an analyst quickly drill down to the highest-priority evidence, the rule that triggered, and the exact artifact that needs review.
+### Html Report - Prioritized Findings help an analyst quickly drill down to the highest-priority evidence, the rule that triggered, and the exact artifact that needs review.
 ##
 ![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/findings.png?raw=true)
 
