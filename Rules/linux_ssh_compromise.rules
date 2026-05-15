@@ -1,0 +1,13 @@
+# rule_id	severity	egrep_pattern	stdout_path_scope
+SSH_INVALID_LOGIN	medium	Invalid user|Failed password|authentication failure	*/Logs/*
+SSH_ACCEPTED_LOGIN	medium	Accepted password|Accepted publickey	*/Logs/*
+AUTHORIZED_KEY_PRESENT	medium	ssh-rsa|ssh-ed25519|ecdsa-sha2	*/Audit/*
+ROOT_EQUIV_USER	high	:0:0:	*/SystemInfo/*
+SUSPICIOUS_HISTORY	medium	curl|wget|chmod \+x|bash -c|nc |ncat|socat	*/Logs/*
+SSH_KEY_PROVENANCE	medium	authorized_keys|ssh-rsa|ssh-ed25519|ecdsa-sha2|sha256	*/Audit/*
+PAM_AUTH_CHANGE	high	pam_exec|pam_python|pam_permit|nullok|pam_tally	*/Audit/*
+UID_GID_ANOMALY	critical	UID0_NONROOT|SYSTEM_USER_WITH_SHELL|SUSPICIOUS_HOME	*/SystemInfo/*
+LD_PRELOAD_ROOTKIT	critical	/etc/ld.so.preload|/tmp|/dev/shm|LD_PRELOAD	*/ASEP/*
+SYSTEMD_USER_PERSISTENCE	high	.service|.timer|ExecStart|WantedBy|systemd	*/ASEP/*
+FILE_CAPABILITY	high	cap_.*\+	*/Audit/*
+DELETED_RUNNING_FILE	high	deleted|\+L1	*/RunningProcesses/*

@@ -1,4 +1,15 @@
 #!/bin/bash
+# BIRTHA_TYPE=collect
+# BIRTHA_OS=all
+# BIRTHA_CATEGORY=persistence
+# BIRTHA_REQUIRES=root
+# BIRTHA_MODIFIES_SYSTEM=false
+# BIRTHA_EXPECTED_RUNTIME=short
+# BIRTHA_OUTPUT=text
+# BIRTHA_CONFIDENCE=medium
+# BIRTHA_NOISE_LEVEL=medium
+# BIRTHA_TRIAGE_PRIORITY=3
+# BIRTHA_DEPENDS=bash
 # description:
 #	list root user's crontab
 #
@@ -7,4 +18,17 @@
 # about: 
 #	This script is part of the Birtha project: https://github.com/ArronJablonowski/birtha 
 #
-crontab -u root -l
+if ! output="$(crontab -u root -l 2>&1)"; then
+    case "$output" in
+        *"no crontab"*)
+            echo "NO_CRONTAB: root"
+            exit 0
+            ;;
+        *)
+            printf '%s\n' "$output" >&2
+            exit 1
+            ;;
+    esac
+fi
+
+printf '%s\n' "$output"

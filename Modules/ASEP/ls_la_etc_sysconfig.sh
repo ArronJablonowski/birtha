@@ -1,4 +1,15 @@
 #!/bin/bash
+# BIRTHA_TYPE=collect
+# BIRTHA_OS=all
+# BIRTHA_CATEGORY=persistence
+# BIRTHA_REQUIRES=unknown
+# BIRTHA_MODIFIES_SYSTEM=false
+# BIRTHA_EXPECTED_RUNTIME=short
+# BIRTHA_OUTPUT=text
+# BIRTHA_CONFIDENCE=medium
+# BIRTHA_NOISE_LEVEL=medium
+# BIRTHA_TRIAGE_PRIORITY=3
+# BIRTHA_DEPENDS=bash
 # description:
 #	list the contents of sysconfig directory   
 #
@@ -8,4 +19,8 @@
 #	This script is part of the Birtha project: https://github.com/ArronJablonowski/birtha 
 #
 #
-ls -la /etc/sysconfig
+if [[ -e /etc/sysconfig ]]; then
+    ls -la /etc/sysconfig
+else
+    echo "NOT_PRESENT: /etc/sysconfig"
+fi

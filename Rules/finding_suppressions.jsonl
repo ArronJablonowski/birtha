@@ -1,0 +1,3 @@
+{"id":"example-disabled-suppression","enabled":false,"rule_id":"NETWORK_ESTABLISHED","evidence_path_contains":"/Network/","matched_value_regex":"example\\.com|192\\.0\\.2\\.","reason":"Disabled example showing optional suppression fields.","owner":"analyst","created_utc":"2026-05-15T00:00:00Z"}
+{"id":"suppress-deleted-open-file","enabled":true,"rule_id":"DELETED_OPEN_FILE","reason":"Suppress deleted-but-running file detections from prioritized findings.","owner":"analyst","created_utc":"2026-05-15T00:00:00Z"}
+{"id":"suppress-linux-writable-systemd","enabled":true,"rule_id":"LINUX_WRITABLE_SYSTEMD","reason":"Suppress writable or suspicious systemd service path detections from prioritized findings.","owner":"analyst","created_utc":"2026-05-15T00:00:00Z"}

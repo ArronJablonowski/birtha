@@ -1,0 +1,10 @@
+# rule_id	severity	egrep_pattern	stdout_path_scope
+LAUNCHD_LOLBIN	high	ProgramArguments|osascript|curl|wget|python|perl|ruby|bash -c	*/ASEP/*
+BTM_BACKGROUND_ITEM	medium	background|item|login	*/ASEP/*
+SYSTEM_EXTENSION	medium	enabled|activated|teamID	*/Audit/*
+TCC_PRIVACY_GRANT	medium	kTCCService|SystemPolicy|Accessibility|ScreenCapture	*/Audit/*
+QUARANTINE_RECENT	medium	com.apple.quarantine|http|https	*/DiskUsage/*
+UNSIGNED_PERSISTENCE_EXECUTABLE	high	not signed|code object is not signed|TeamIdentifier=not set	*/Audit/*
+GATEKEEPER_XPROTECT_EVENT	medium	Gatekeeper|XProtect|MRT|syspolicyd|malware	*/Logs/*
+LOGIN_ITEM_PRESENT	medium	login item|path:|hidden:	*/ASEP/*
+LAUNCHSERVICES_HANDLER	low	handlers:|bindings:|path:	*/Audit/*

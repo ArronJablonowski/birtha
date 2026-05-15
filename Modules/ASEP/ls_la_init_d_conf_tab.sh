@@ -1,4 +1,15 @@
 #!/bin/bash
+# BIRTHA_TYPE=collect
+# BIRTHA_OS=all
+# BIRTHA_CATEGORY=persistence
+# BIRTHA_REQUIRES=unknown
+# BIRTHA_MODIFIES_SYSTEM=false
+# BIRTHA_EXPECTED_RUNTIME=short
+# BIRTHA_OUTPUT=text
+# BIRTHA_CONFIDENCE=medium
+# BIRTHA_NOISE_LEVEL=medium
+# BIRTHA_TRIAGE_PRIORITY=3
+# BIRTHA_DEPENDS=bash
 # description:
 #
 #	list inittab, init.d, init.conf, & init directories 
@@ -15,21 +26,21 @@
 # about: 
 #	This script is part of the Birtha project: https://github.com/ArronJablonowski/birtha 
 #
-echo "#> Inittab"
-echo "----------"
-ls -la /etc/inittab
+show_path() {
+    local label="$1"
+    local path="$2"
 
-echo ""
-echo "#> Init.d"
-echo "---------"
-ls -la /etc/init.d
+    echo "#> $label"
+    echo "----------"
+    if [[ -e "$path" ]]; then
+        ls -la "$path"
+    else
+        echo "NOT_PRESENT: $path"
+    fi
+    echo ""
+}
 
-echo ""
-echo "#> Init.conf"
-echo "------------"
-ls -la /etc/init.conf
-
-echo ""
-echo "#> Init"
-echo "-------"
-ls -la /etc/init
+show_path "Inittab" "/etc/inittab"
+show_path "Init.d" "/etc/init.d"
+show_path "Init.conf" "/etc/init.conf"
+show_path "Init" "/etc/init"

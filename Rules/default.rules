@@ -1,0 +1,17 @@
+# rule_id	severity	egrep_pattern	stdout_path_scope
+MAC_PERSIST_LOLBIN	high	curl|wget|osascript|python|perl|ruby|bash -c|nc |ncat|socat|base64|chmod \+x	*/ASEP/*
+MAC_TMP_PERSISTENCE	high	/tmp|/var/tmp|/private/tmp	*/ASEP/*
+SSH_AUTHORIZED_KEYS	medium	ssh-rsa|ssh-ed25519|ecdsa-sha2	*/Audit/*
+NETWORK_ESTABLISHED	medium	ESTABLISHED	*/Network/*
+DELETED_OPEN_FILE	high	deleted|\+L1	*/RunningProcesses/*
+ROOT_UID_USER	high	:0:0:	*/SystemInfo/*
+LINUX_UID0_NONROOT	critical	UID0_NONROOT	*/SystemInfo/*
+LINUX_LD_PRELOAD	critical	/etc/ld.so.preload|/tmp|/dev/shm|LD_PRELOAD	*/ASEP/*
+LINUX_WRITABLE_SYSTEMD	high	writable|rwx|rw.|-w-|systemd	*/ASEP/*
+LINUX_CAPABILITIES	high	cap_.*\+	*/Audit/*
+LINUX_PAM_BACKDOOR	high	pam_exec|pam_python|pam_permit|pam_unix.*nullok|pam_tally	*/Audit/*
+PACKAGE_ACTIVITY	medium	install|upgrade|remove|erase|Commandline	*/InstalledApplications/*
+CONTAINER_PRESENT	medium	CONTAINER|IMAGE|docker|podman|crictl	*/Containers/*
+MAC_UNSIGNED_CODE	high	not signed|code object is not signed|TeamIdentifier=not set	*/Audit/*
+MAC_GATEKEEPER_XPROTECT	medium	Gatekeeper|XProtect|MRT|syspolicyd|malware	*/Logs/*
+MAC_LOGIN_ITEM	medium	login item|path:|hidden:	*/ASEP/*
