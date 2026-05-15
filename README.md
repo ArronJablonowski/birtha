@@ -74,9 +74,9 @@ Modules/
   -> focused collection modules organized by artifact category and operating system
 ```
 
-## Report Preview
+## Preview
 
-### Main HTML Report
+### CLI
 
 ![Birtha HTML report overview](https://github.com/ArronJablonowski/birtha/blob/main/img/birtha.png?raw=true)
 
