@@ -6,6 +6,12 @@ Birtha is designed for SOC analysts and incident responders who need repeatable 
 
 ![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/birtha.png?raw=true)
 
+### Html report - Stats 
+![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/stats.png?raw=true)
+
+### Html report - Findings
+![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/findings.png?raw=true)
+
 ## Quick Start
 
 Remote collection over SSH:
