@@ -1225,8 +1225,8 @@ th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spa
 EOF
         echo '<section class="hero">'
         echo '<p class="eyebrow">Birtha Live Incident Response</p>'
-        echo '<h1>Timeline and Findings Focus</h1>'
-        echo '<p class="subtitle">A findings-first incident response report that puts severity, evidence, and collection timeline in the analyst path before supporting artifacts.</p>'
+        echo '<h1>Triage Workbench</h1>'
+        echo '<p class="subtitle">A focused incident response report built to help analysts move quickly from high-priority findings to supporting evidence.</p>'
         echo '<div class="meta-row">'
         printf '<span class="pill">Generated UTC: %s</span>\n' "$(json_escape "$generated_utc" | html_escape)"
         printf '<span class="pill">Run: %s</span>\n' "$(json_escape "$run_dir" | html_escape)"
