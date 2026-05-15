@@ -139,7 +139,7 @@ sorted_findings_tsv() {
 
     awk -F'"' '
         {
-            sev=rule=title=path=val=why=mitre="";
+            sev=rule=title=path=val=why=mitre=host_name=host_ip="";
             for (i=1; i<=NF; i++) {
                 if ($i=="severity") sev=$(i+2)
                 if ($i=="rule_id") rule=$(i+2)
@@ -148,6 +148,8 @@ sorted_findings_tsv() {
                 if ($i=="matched_value") val=$(i+2)
                 if ($i=="why_it_matters") why=$(i+2)
                 if ($i=="mitre_attack") mitre=$(i+2)
+                if ($i=="host_hostname") host_name=$(i+2)
+                if ($i=="host_ip") host_ip=$(i+2)
             }
             if (title == "") title = rule
             rank=5
@@ -162,7 +164,7 @@ sorted_findings_tsv() {
             }
             gsub(/^[^0-9]*/, "", finding_line)
             gsub(/[^0-9].*$/, "", finding_line)
-            print rank "\t" NR "\t" sev "\t" rule "\t" title "\t" mitre "\t" val "\t" why "\t" path "\t" finding_line
+            print rank "\t" NR "\t" sev "\t" rule "\t" title "\t" mitre "\t" val "\t" why "\t" path "\t" finding_line "\t" host_name "\t" host_ip
         }
     ' "$findings_file" | sort -n -k1,1 -k2,2 | cut -f3-
 }
@@ -521,6 +523,47 @@ host_os_family() {
     os_family_from_text "$uname_text"
 }
 
+host_profile_hostname() {
+    local run_dir="$1"
+    local host_dir="$2"
+    local profile_file="$run_dir/$host_dir/_preflight/profile.txt"
+
+    if [[ -r "$profile_file" ]]; then
+        awk -F= '/^hostname=/ {sub(/^hostname=/, ""); print; exit}' "$profile_file"
+    fi
+}
+
+host_ip_address() {
+    local host_dir="$1"
+
+    printf '%s\n' "$host_dir" |
+        awk '
+            {
+                value = $0
+                while (match(value, /[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+/)) {
+                    candidate = substr(value, RSTART, RLENGTH)
+                    split(candidate, octets, ".")
+                    if (octets[1] <= 255 && octets[2] <= 255 && octets[3] <= 255 && octets[4] <= 255) {
+                        print candidate
+                        exit
+                    }
+                    value = substr(value, RSTART + RLENGTH)
+                }
+                value = $0
+                while (match(value, /[0-9]+_[0-9]+_[0-9]+_[0-9]+/)) {
+                    candidate = substr(value, RSTART, RLENGTH)
+                    split(candidate, octets, "_")
+                    if (octets[1] <= 255 && octets[2] <= 255 && octets[3] <= 255 && octets[4] <= 255) {
+                        gsub(/_/, ".", candidate)
+                        print candidate
+                        exit
+                    }
+                    value = substr(value, RSTART + RLENGTH)
+                }
+            }
+        '
+}
+
 rule_os_matches_host() {
     local rule_os="$1"
     local host_os="$2"
@@ -697,7 +740,7 @@ write_findings() {
     local suppressions_file
     local rule_id title severity pattern scope mitre confidence why false_positive next_steps tags os artifact score
     local match_file line_number matched
-    local host host_os key matched_hash
+    local host host_os host_hostname host_ip key matched_hash
     local finding_number=0
     local suppressed_number=0
 
@@ -745,10 +788,14 @@ write_findings() {
                 continue
             fi
             finding_number=$((finding_number + 1))
-            printf '{"finding_id":"BIRTHA-%06d","finding_key":"%s","host":"%s","host_os":"%s","severity":"%s","confidence":"%s","score":%s,"rule_id":"%s","title":"%s","artifact":"%s","evidence_path":"%s","line":%s,"matched_sha256":"%s","matched_value":"%s","why_it_matters":"%s","false_positive_notes":"%s","mitre_attack":"%s","recommended_next_steps":"%s","tags":"%s","os":"%s","rules_file":"%s"}\n' \
+            host_hostname="$(host_profile_hostname "$run_dir" "$host")"
+            host_ip="$(host_ip_address "$host")"
+            printf '{"finding_id":"BIRTHA-%06d","finding_key":"%s","host":"%s","host_hostname":"%s","host_ip":"%s","host_os":"%s","severity":"%s","confidence":"%s","score":%s,"rule_id":"%s","title":"%s","artifact":"%s","evidence_path":"%s","line":%s,"matched_sha256":"%s","matched_value":"%s","why_it_matters":"%s","false_positive_notes":"%s","mitre_attack":"%s","recommended_next_steps":"%s","tags":"%s","os":"%s","rules_file":"%s"}\n' \
                 "$finding_number" \
                 "$(json_escape "$key")" \
                 "$(json_escape "$host")" \
+                "$(json_escape "$host_hostname")" \
+                "$(json_escape "$host_ip")" \
                 "$(json_escape "$host_os")" \
                 "$(json_escape "$severity")" \
                 "$(json_escape "$confidence")" \
@@ -767,7 +814,7 @@ write_findings() {
                 "$(json_escape "$tags")" \
                 "$(json_escape "$os")" \
                 "$(json_escape "$rules_file")" >> "$findings_file"
-        done < <(find "$run_dir" -type f \( -name stdout.log -o -name stdout.txt \) -path "$scope" -print0 | xargs -0 grep -EIn "$pattern" 2>/dev/null || true)
+        done < <(find "$run_dir" -type f \( -name stdout.log -o -name stdout.txt \) -path "$scope" -print0 | xargs -0 grep -EHIn "$pattern" 2>/dev/null || true)
     done < <(rules_to_tsv "$rules_file")
 
     echo "Findings written: $findings_file"
@@ -1219,7 +1266,7 @@ EOF
         echo '<div class="focus-grid">'
         printf '<section class="section" id="prioritized-findings"><div class="section-header"><div class="section-heading"><h2>Prioritized Findings</h2><span class="section-note">%s</span></div><div class="section-actions"><button type="button" class="findings-bulk-toggle" aria-expanded="true">Collapse All</button></div></div><div class="content">\n' "$(printf '%s' "$findings_note" | html_escape)"
         if [[ -s "$findings_file" ]]; then
-            sorted_findings_tsv "$findings_file" | limit_report_findings | while IFS=$'\t' read -r sev rule title mitre val why evidence_path evidence_line; do
+            sorted_findings_tsv "$findings_file" | limit_report_findings | while IFS=$'\t' read -r sev rule title mitre val why evidence_path evidence_line host_hostname host_ip; do
                 sev_class="${sev:-info}"
                 [[ "$sev_class" == "informational" ]] && sev_class="info"
                 display_path="$evidence_path"
@@ -1239,6 +1286,12 @@ EOF
                 echo '<button type="button" class="finding-toggle" aria-expanded="true">Collapse</button>'
                 echo '</div>'
                 echo '<div class="finding-body">'
+                if [[ -n "$host_hostname" ]]; then
+                    printf '<p><strong>Hostname:</strong> %s</p>\n' "$(printf '%s' "$host_hostname" | html_escape)"
+                fi
+                if [[ -n "$host_ip" ]]; then
+                    printf '<p><strong>Host IP:</strong> %s</p>\n' "$(printf '%s' "$host_ip" | html_escape)"
+                fi
                 printf '<p><strong>Matched value:</strong> %s</p>\n' "$(printf '%s' "$val" | html_escape)"
                 printf '<p><strong>Matched line:</strong> %s</p>\n' "$(printf '%s' "${evidence_line:-unknown}" | html_escape)"
                 printf '<p><strong>Why it matters:</strong> %s</p>\n' "$(printf '%s' "$why" | html_escape)"

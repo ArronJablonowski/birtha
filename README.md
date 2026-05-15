@@ -6,14 +6,6 @@ Birtha is designed for SOC analysts and incident responders who need repeatable 
 
 ![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/birtha.png?raw=true)
 
-### Html Report - Stats provide a brief overview of Birtha’s collection performance and finding volume.
-##
-![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/stats.png?raw=true)
-
-### Html Report - Prioritized Findings help an analyst quickly drill down to the highest-priority evidence, the rule that triggered, and the exact artifact that needs review.
-##
-![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/findings.png?raw=true)
-
 ## Quick Start
 
 Remote collection over SSH:
@@ -929,6 +921,14 @@ HTML report:
 ```text
 Results/<run>/birtha-executive-report.html
 ```
+
+### HTML Report - Stats
+
+The Stats areas give analysts a fast read on collection health and finding volume before diving into evidence. They summarize module runs, host and module counts, failures, skipped modules, timeouts, severity distribution, and suppression impact. In the Suppression Summary, `Active Findings` counts unsuppressed findings in `findings.jsonl`, while `Suppressed` counts matched findings written to `suppressed_findings.jsonl`.
+
+### HTML Report - Findings
+
+The Findings area is the analyst work queue for the report. It shows active prioritized findings ranked by severity, with rule title, MITRE mapping, matched value, matched line, rationale, and the full triggering evidence file in a compact scrollable window with highlighted matched text. Findings can be collapsed individually or controlled together with the single Collapse All/Expand All button.
 
 The HTML report includes:
 
