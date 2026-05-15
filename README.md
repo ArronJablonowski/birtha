@@ -1,19 +1,105 @@
-# birtha - Bash Incident Response & Threat Hunt Automation
-Bash-based live response and DFIR triage toolkit for macOS, Linux, and Unix-like systems.
-##
-Birtha is a modular Bash framework for live incident response and threat hunting on macOS, Linux, and Unix-like systems. It collects host artifacts locally or over SSH, records a structured execution manifest, normalizes common evidence, generates prioritized findings, supports analyst suppressions, and produces Markdown/HTML executive reports.
+# Birtha - Live Incident Response & Threat Hunting Framework
 
-Birtha is designed for SOC analysts and incident responders who need repeatable live-response collection without installing an agent on the target host.
+Birtha is a modular Bash framework for live incident response, DFIR triage, and threat hunting across macOS, Linux, and Unix-like systems. It automates repeatable evidence collection, applies rule-based detections, tracks module execution, supports finding suppressions, and generates analyst-ready HTML and Markdown reports.
 
-![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/birtha.png?raw=true)
+Birtha is designed for SOC analysts, incident responders, security engineers, and threat hunters who need fast host triage without deploying a persistent agent on the target system.
 
-### Html Report - Stats provide a brief overview of Birtha’s collection performance and finding volume.
-##
-![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/stats.png?raw=true)
+## Portfolio Summary
 
-### Html Report - Prioritized Findings help an analyst quickly drill down to the highest-priority evidence, the rule that triggered, and the exact artifact that needs review.
-##
-![alt text](https://github.com/ArronJablonowski/birtha/blob/main/img/findings.png?raw=true)
+This project demonstrates how a practical incident response tool can be built with portable shell tooling while still providing enterprise-style workflows: local and remote collection, curated response profiles, structured manifests, JSONL detection rules, suppression management, OS-aware findings, evidence bundling, and professional executive reporting.
+
+Birtha is more than a script runner. It is an extensible live-response framework that connects collection, detection, reporting, and evidence handling into one repeatable analyst workflow.
+
+## Technology & Skills
+
+- **Languages and tooling:** Bash, POSIX shell utilities, JSONL, TSV, Markdown, HTML, CSS, and SSH.
+- **Security domains:** live incident response, DFIR triage, threat hunting, persistence analysis, SSH compromise review, macOS artifact collection, Linux/Unix artifact collection, and evidence preservation.
+- **Engineering practices:** modular design, structured logging, command-line UX, safety controls, backward compatibility, detection rules, suppression databases, and report generation.
+- **Operational workflows:** single-host triage, multi-host collection, local collection, post-collection analysis, analyst review, and evidence packaging.
+
+## What This Project Demonstrates
+
+- Cross-platform live response automation using Bash.
+- macOS, Linux, and Unix artifact collection across local and SSH-based workflows.
+- Modular engineering with profile-driven collections and reusable module metadata.
+- Rule-based detection using JSONL rules with legacy TSV compatibility.
+- OS-aware finding generation so macOS, Linux, Unix, and generic rules are applied to the right host evidence.
+- Prioritized findings with severity ordering, suppression support, highlighted evidence, and analyst guidance.
+- Professional HTML and Markdown reporting designed for incident review and executive communication.
+- Operational safety through dry-run mode, validation mode, SSH controls, timeouts, manifests, and separated remediation modules.
+- Evidence preservation through checksums, bundle creation, run manifests, and structured case metadata.
+
+## Design Goals
+
+- **Fast to run:** give analysts practical collection profiles for common incident response scenarios.
+- **Repeatable:** record what ran, where it ran, when it ran, and what each module produced.
+- **Analyst-friendly:** surface prioritized findings with evidence context instead of forcing analysts to manually search every log first.
+- **Portable:** rely on standard shell tooling and avoid installing a persistent agent on target systems.
+- **Extensible:** make modules, profiles, JSONL rules, and suppressions easy to add or modify.
+- **Safe by default:** keep collection behavior separate from remediation and require explicit opt-in for system-changing modules.
+
+## Designed For
+
+- SOC analysts performing first-pass triage on live systems.
+- Incident responders collecting volatile host context during an active investigation.
+- Threat hunters looking for persistence, suspicious execution, exposed services, SSH abuse, or unusual system configuration.
+- Security engineers who need repeatable collection procedures that can be reviewed, versioned, and tuned.
+- Lab environments where responders can test detections, modules, and reporting workflows before using them operationally.
+
+## Key Capabilities
+
+- Run against one host, many hosts, or the local machine.
+- Use curated profiles for fast triage, macOS compromise, macOS persistence, Linux/Unix compromise, SSH compromise, cryptominer response, or deeper forensic collection.
+- Collect host artifacts into structured `Results/` directories with per-module stdout, stderr, metadata, and execution manifests.
+- Generate prioritized findings from JSONL rules and suppress known-good findings with an editable JSONL suppression database.
+- Produce HTML reports with stats, severity-ranked findings, highlighted evidence excerpts, full scrollable log views, and collection timelines.
+- Create evidence bundles with manifests, SHA256 checksums, and optional detached GPG signatures.
+
+## Architecture At A Glance
+
+```text
+birtha.sh
+  -> reads host input, profile/config, case metadata, and safety switches
+  -> runs collection modules locally or over SSH
+  -> writes Results/<run>/ with manifests, module output, and preflight data
+
+birtha-analyze.sh
+  -> summarizes runs, normalizes evidence, applies rules, manages suppressions
+  -> generates Markdown/HTML reports and evidence bundles
+
+Rules/
+  -> JSONL-first detections with severity, OS scope, MITRE mapping, rationale, and response guidance
+
+Modules/
+  -> focused collection modules organized by artifact category and operating system
+```
+
+## Report Preview
+
+### Main HTML Report
+
+![Birtha HTML report overview](https://github.com/ArronJablonowski/birtha/blob/main/img/birtha.png?raw=true)
+
+### HTML Report - Stats
+
+Stats provide a quick overview of Birtha's collection performance, finding volume, module health, severity distribution, and suppression impact.
+
+![Birtha HTML report stats](https://github.com/ArronJablonowski/birtha/blob/main/img/stats.png?raw=true)
+
+### HTML Report - Prioritized Findings
+
+Prioritized Findings help an analyst quickly drill down to the highest-priority evidence, the rule that triggered, and the exact artifact that needs review.
+
+![Birtha HTML report findings](https://github.com/ArronJablonowski/birtha/blob/main/img/findings.png?raw=true)
+
+## Documentation Map
+
+- Start with **Quick Start** if you want to run Birtha immediately.
+- Review **Requirements** and **Pre-Usage Setup** before remote collection.
+- Use **Collection Concepts** to understand how evidence is written to disk.
+- Use **Switch Reference** and **Analyzer Command Reference** as the complete operator manual.
+- Use **Prioritized Findings**, **Suppression Database**, and **Report Output** to tune detections and reports.
+- Use **Safety Model** and **Suggested SOC Workflows** when applying Birtha in an operational environment.
 
 ## Quick Start
 
@@ -46,6 +132,31 @@ Analyze an existing run:
 ./birtha-analyze.sh html-report ./Results/<timestamp> --all-findings
 ./birtha-analyze.sh bundle ./Results/<timestamp>
 ```
+
+## Requirements
+
+Birtha is designed to run from a macOS, Linux, or Unix-like collector system with standard shell tooling.
+
+Collector system requirements:
+
+- `bash` to run `birtha.sh` and `birtha-analyze.sh`.
+- Standard command-line tools: `sh`, `awk`, `sed`, `grep`, `find`, `sort`, `xargs`, `wc`, `tar`, and `shasum` or `sha256sum`.
+- `ssh` and `ssh-add` for remote collection.
+- `open` on macOS or `xdg-open` on Linux if you want generated reports to open automatically.
+- Optional: `jq` for stronger JSONL rule validation and parsing. Birtha has a fallback parser for simple JSONL rule fields.
+- Optional: `gpg` for detached signatures when creating evidence bundles.
+
+Target host requirements:
+
+- Remote targets must be reachable over SSH unless using local mode.
+- The remote account should have permission to read the artifacts you want to collect. For full live response, `root` or equivalent privileges are recommended.
+- Target hosts need a POSIX shell such as `sh`; individual modules may require tools such as `bash`, `zsh`, `lsof`, `ps`, `netstat`, `ss`, `systemctl`, `journalctl`, `launchctl`, `sqlite3`, `codesign`, `docker`, `podman`, or `crictl` depending on the selected config.
+- Birtha does not require installing an agent on target hosts.
+
+Project layout requirements:
+
+- Run commands from the repository root so paths such as `Modules/`, `BirthaConfigs/`, `Rules/`, and `Results/` resolve correctly.
+- Keep `birtha.sh`, `birtha-analyze.sh`, module files, and config files executable/readable by the collector user.
 
 ## Pre-Usage Setup
 
@@ -1017,6 +1128,27 @@ Birtha defaults to collection-first behavior.
 - Per-module metadata marks whether a module modifies the system.
 - `--dry-run` and `--validate` support review before execution.
 - `--strict-host-keys`, `--known-hosts`, and `--identity-file` support stronger SSH controls.
+
+Birtha is intended to support live response and triage. It should complement, not replace, full forensic imaging, endpoint telemetry, EDR data, SIEM correlation, and formal evidence-handling procedures required by your organization.
+
+## Project Status And Roadmap
+
+Current strengths:
+
+- Local and SSH-based collection workflows.
+- Curated response profiles for common macOS, Linux, Unix, SSH, and cryptominer investigations.
+- JSONL-first detection rules with severity, OS scope, MITRE mapping, rationale, and next-step guidance.
+- Suppression database support for managing known-good findings.
+- Professional HTML and Markdown reporting with highlighted evidence and collection timelines.
+- Evidence bundle generation with checksums and optional detached signatures.
+
+Planned areas for continued improvement:
+
+- Expand high-confidence rules for cloud agents, developer tooling, identity artifacts, containers, and modern macOS persistence.
+- Add more validation tests for rules, report generation, module metadata, and sample result sets.
+- Build richer sample reports from sanitized lab data.
+- Continue improving detection tuning so the default findings stay useful and low-noise.
+- Add more analyst-focused documentation for investigation playbooks and case workflows.
 
 ## Exit Behavior
 
