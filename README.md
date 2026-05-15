@@ -1,4 +1,4 @@
-# Birtha - Live Incident Response & Threat Hunting Automation
+# Birtha - Bash Incident Response & Threat Hunting Automation
 
 Birtha is a modular Bash framework for live incident response, DFIR triage, and threat hunting across macOS, Linux, and Unix-like systems. It automates repeatable evidence collection, applies rule-based detections, tracks module execution, supports finding suppressions, and generates analyst-ready HTML and Markdown reports.
 
